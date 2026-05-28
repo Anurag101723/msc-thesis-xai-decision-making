@@ -1,171 +1,120 @@
-# 🔬 Explainable AI for Strategic Decision-Making in SMEs
+# Explainable AI for Strategic Decision-Making in SMEs
 
-> **Master's Thesis** — M.Sc. Big Data & Business Analytics  
-> FOM University of Applied Sciences, Essen, Germany · Grade: **1.9**
-
-![Python](https://img.shields.io/badge/Python-3.12-blue?style=flat&logo=python&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-2.0-red?style=flat)
-![SHAP](https://img.shields.io/badge/SHAP-0.44-orange?style=flat)
-![LIME](https://img.shields.io/badge/LIME-0.2-yellow?style=flat)
-![Status](https://img.shields.io/badge/Thesis-Grade%201.9-brightgreen?style=flat)
+Master's Thesis — M.Sc. Big Data and Business Analytics  
+FOM University of Applied Sciences, Essen, Germany  
+Grade: 1.9 | October 2025 – February 2026
 
 ---
 
-## 📌 Overview
+## Overview
 
-Black-box machine learning models are powerful — but in high-stakes enterprise environments, **accuracy alone is not enough**. Decision-makers need to understand *why* a model recommends what it does before they can act on it with confidence.
+Black-box machine learning models are powerful but insufficient for high-stakes enterprise environments where decision-makers need to understand why a model recommends what it does before acting on it. This thesis designs, implements, and validates a full explainable AI (XAI) framework for strategic decision support in enterprise contexts.
 
-This thesis designs, implements, and validates a full **Explainable AI (XAI) framework** for strategic decision support in enterprise contexts. By integrating **multi-source heterogeneous data** with state-of-the-art interpretability tools — SHAP and LIME — the framework bridges the gap between predictive performance and human-understandable reasoning.
+The framework integrates multi-source heterogeneous data with SHAP and LIME interpretability tools, bridging the gap between predictive performance and human-understandable reasoning.
 
-The research addresses a critical question:
-
-> *How can explainable AI be systematically integrated into enterprise decision pipelines to achieve both high predictive accuracy and full model transparency?*
+Research question: How can explainable AI be systematically integrated into enterprise decision pipelines to achieve both high predictive accuracy and full model transparency?
 
 ---
 
-## 🎯 Research Objectives
+## Models and Performance
 
-1. **Model Performance** — Develop high-accuracy predictive models using Random Forest and XGBoost across heterogeneous enterprise data
-2. **Interpretability** — Apply SHAP and LIME to produce both global and local explanations for every prediction
-3. **Stakeholder Usability** — Ensure non-technical decision-makers can act on model outputs with confidence
-4. **Framework Validation** — Validate the XAI pipeline across multiple decision contexts and data types
-
----
-
-## 🏆 Key Contributions
-
-| Contribution | Description |
-|---|---|
-| XAI Pipeline | End-to-end framework from raw data to interpretable prediction |
-| Dual Explainability | SHAP for global feature ranking + LIME for local case-level explanation |
-| Multi-source Integration | Heterogeneous data fusion across structured and semi-structured sources |
-| Stakeholder Layer | Plain-language explanation outputs designed for non-technical audiences |
-| Comparative Analysis | Random Forest vs XGBoost performance and interpretability trade-offs |
+| Model | Accuracy | ROC AUC | Notes |
+|---|---|---|---|
+| XGBoost | Best performer | Superior | Primary model |
+| Random Forest | Baseline | Competitive | Comparison model |
 
 ---
 
-## 🛠️ Tech Stack
+## XAI Methods Applied
+
+| Method | Type | Purpose |
+|---|---|---|
+| SHAP TreeExplainer | Global + Local | Feature ranking, case-level explanation |
+| SHAP SummaryPlot | Global | Visual feature importance across dataset |
+| LIME | Local | Individual prediction explanation for stakeholders |
+
+---
+
+## Framework Architecture
+
+```
+Data Layer
+Multi-source heterogeneous enterprise data
+
+Preprocessing Layer
+Cleaning, encoding, scaling, feature selection
+
+Model Layer
+XGBoost and Random Forest with cross-validation
+
+Explainability Layer
+SHAP (global rankings, dependence plots, interaction effects)
+LIME (local case-level explanations, feature weights)
+
+Decision Support Layer
+Human-readable outputs for non-technical stakeholders
+Audit trails and compliance-ready documentation
+```
+
+---
+
+## Key Findings
+
+- XGBoost outperformed Random Forest in predictive accuracy across all tested decision contexts
+- SHAP provided stable global explanations with consistent feature rankings across data splits
+- LIME excelled at local explanations, enabling case-by-case justification for individual predictions
+- Interpretability did not significantly reduce accuracy versus black-box baselines
+- Administrative and contextual variables frequently ranked among top predictors
+
+---
+
+## Tech Stack
 
 | Category | Tools |
 |---|---|
 | Language | Python 3.12 |
-| ML Models | XGBoost, Random Forest |
-| Explainability | SHAP (TreeExplainer, SummaryPlot), LIME |
-| Data Processing | Pandas, NumPy, Scikit-learn |
+| ML Models | XGBoost, Random Forest (Scikit-learn) |
+| Explainability | SHAP, LIME |
+| Data Processing | Pandas, NumPy |
 | Visualisation | Matplotlib, Seaborn |
 | Environment | Jupyter Notebook |
 
 ---
 
-## 🔍 Framework Architecture
-
-```
-┌─────────────────────────────────────────────────────┐
-│                   DATA LAYER                        │
-│   Multi-source heterogeneous enterprise data        │
-│   (structured + semi-structured inputs)             │
-└────────────────────┬────────────────────────────────┘
-                     ↓
-┌─────────────────────────────────────────────────────┐
-│               PREPROCESSING LAYER                   │
-│   Cleaning · Encoding · Scaling · Feature Selection │
-└────────────────────┬────────────────────────────────┘
-                     ↓
-┌─────────────────────────────────────────────────────┐
-│                  MODEL LAYER                        │
-│   Random Forest  ←→  XGBoost                       │
-│   Hyperparameter tuning · Cross-validation          │
-└────────────────────┬────────────────────────────────┘
-                     ↓
-┌─────────────────────────────────────────────────────┐
-│             EXPLAINABILITY LAYER                    │
-│                                                     │
-│   SHAP                        LIME                  │
-│   ├── Global feature ranks    ├── Local explanations│
-│   ├── Dependence plots        ├── Case-level why    │
-│   └── Interaction effects     └── Feature weights  │
-└────────────────────┬────────────────────────────────┘
-                     ↓
-┌─────────────────────────────────────────────────────┐
-│              DECISION SUPPORT LAYER                 │
-│   Human-readable outputs for non-technical          │
-│   stakeholders · Audit trails · Compliance ready    │
-└─────────────────────────────────────────────────────┘
-```
-
----
-
-## 🔑 Key Findings
-
-- **XGBoost outperformed Random Forest** in predictive accuracy across all tested decision contexts
-- **SHAP provided stable global explanations** — consistent feature rankings across data splits, critical for enterprise trust
-- **LIME excelled at local explanations** — enabling case-by-case justification of individual predictions for stakeholders
-- **Interpretability does not significantly reduce accuracy** — the XAI framework achieved competitive performance vs black-box baselines
-- **Administrative and contextual variables** frequently ranked among top predictors, highlighting systemic factors beyond raw operational data
-- The framework is **deployment-ready** — runtime efficiency supports near-real-time decision support integration
-
----
-
-## 📐 Why XGBoost + SHAP + LIME?
-
-| Method | Why Used |
-|---|---|
-| **XGBoost** | Superior performance on structured tabular data; handles missing values natively |
-| **Random Forest** | Robust baseline; natural feature importance scores; lower overfitting risk |
-| **SHAP** | Theoretically grounded (game theory); consistent global + local attribution |
-| **LIME** | Model-agnostic; intuitive local approximations; accessible to non-technical users |
-
----
-
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 msc-thesis-xai-decision-making/
-│
-├── thesis_xai_framework.ipynb     # Main implementation notebook
-├── README.md                      # Project documentation
+|
+|-- thesis_xai_framework.ipynb
+|-- README.md
 ```
 
 ---
 
-## 🚀 How to Run
+## How to Run
 
-1. Clone the repository
 ```bash
 git clone https://github.com/Anurag101723/msc-thesis-xai-decision-making.git
 cd msc-thesis-xai-decision-making
-```
-
-2. Install dependencies
-```bash
 pip install pandas numpy scikit-learn xgboost shap lime matplotlib seaborn
-```
-
-3. Open the notebook
-```bash
 jupyter notebook thesis_xai_framework.ipynb
 ```
 
 ---
 
-## 📚 Academic Context
+## Academic Context
 
-**Program:** M.Sc. Big Data & Business Analytics  
-**Institution:** FOM University of Applied Sciences, Essen, Germany  
-**Period:** October 2025 – February 2026  
-**Grade:** 1.9  
-
-**Research Domain:** Explainable Artificial Intelligence (XAI) · Decision Support Systems · Enterprise Analytics
+Program: M.Sc. Big Data and Business Analytics  
+Institution: FOM University of Applied Sciences, Essen, Germany  
+Period: October 2025 – February 2026  
+Grade: 1.9  
 
 ---
 
-## 👤 Author
+## Author
 
-**Anurag Rathore**  
-M.Sc. Big Data & Business Analytics — FOM University of Applied Sciences  
-📧 anuragakrathore@gmail.com  
-🔗 [LinkedIn](https://linkedin.com/in/anurag1017) · [Portfolio](https://Anurag101723.github.io)
-
----
-
-*"The goal is not just to predict — it is to explain, justify, and earn trust."*
+Anurag Rathore  
+anuragakrathore@gmail.com  
+linkedin.com/in/anurag1017  
+anurag101723.github.io
